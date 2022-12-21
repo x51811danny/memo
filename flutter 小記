@@ -1,0 +1,175 @@
+flutter 小記
+使用主题共享颜色和字体样式 (#ThemeData )
+https://flutterchina.club/cookbook/design/themes/
+
+json转model:
+https://ashamp.github.io/jsonToDartModel/
+
+flutter build apk --obfuscate --split-debug-info=./tmp --target-platform=android-arm,android-arm64 --flavor=xRelease
+flutter build apk --obfuscate --split-debug-info=./tmp --target-platform=android-arm,android-arm64 --flavor=xPreProductionVN --dart-define=LANG_VERSION=vi
+
+echo -n "ME4wTKADAgEAMEUwQzBBMAkGBSsOAwIaBQAEFLYIDV9sa3brE%2BQ4pfhmC6hSMzROBBRAwr0njsw0gzCiM9f7bLPwtCyAzgIIKo7QmXEkUdc%3D" | python3 -c "import sys, urllib.parse as ul; print(ul.unquote(sys.stdin.read()));" | base64 -d | ocsptool -i
+
+echo -n "MEcwRaADAgEAMD4wPDA6MAkGBSsOAwIaBQAEFB0jb44GS5cf3d%2BhFSPhruUCvisbBBQ6moUHEGcotu%2F2vQVBbiDBlNoP3gIBBw%3D%3D" | python3 -c "import sys, urllib.parse as ul; print(ul.unquote(sys.stdin.read()));" | base64 -d | ocsptool -i
+
+nc -l -k -v 80
+
+-
+SVG to PNG
+brew install librsvg
+
+run: 
+rsvg-convert -h 32 icon.svg > icon-32.png
+
+Convert all files in folder: 
+for i in *.svg ; do rsvg-convert -h 72 "$i"> "$i".png ; done
+-
+csv to json
+excel-to-json-iternational
+-
+
+[iOS][Android]
+申请VN正式站台文件替换
+v3.1.23
+[Add] 客服系統SDK(iOS)
+[Add] 拒絕單理由："系統拒絕"的多語化處理
+[Fix] 银行 icon 显示问题
+[Fix] 修正近期回報的翻譯問題
+[Fix] 忘記密碼手機號輸入問題
+
+更新video_player
+https://github.com/ukasz123/soundpool/issues/25
+
+累积投注额送
+
+1. (IOS) 視頻優化並支持FLV
+2. 彈窗效果優化ㄇ
+
+
+--
+Android Hanshake error issue
+https://github.com/flutter/flutter/issues/50699
+
+--
+分享功能
+https://blog.csdn.net/qq_39539361/article/details/80535008?
+
+--
+多語化
+https://juejin.im/post/5e4536d0e51d4526ef5f85a9
+1. 用戶語系不是中文也不是英文時 優先採用？
+
+-- 動畫交互
+https://medium.com/flutter-community/9-amazing-flutter-animation-packages-17c936797070
+
+bottomsheet 動態高度
+https://mightytechno.com/flutter-full-height-bottomsheet/
+
+彈窗
+https://pub.dev/packages/flutter_sequence_animation
+https://pub.dev/packages/simple_animations#-example-tab-
+
+
+其他小動效(數字跳動, 登入轉場球球動畫)
+https://pub.dev/packages/tweener
+
+Spring
+https://github.com/KaushickSArgekar/spring
+
+DatePicker
+https://github.com/dylanwuzh/flutter-cupertino-date-picker/blob/master/README_zh-cn.md
+
+公告輪播控件
+https://github.com/bravekingzhang/tip-flutter-ui/blob/master/lib/TipTextSwitch.dart
+
+自製 Clippath 動畫
+https://stackoverflow.com/questions/55649155/flutter-clippath-animatedcontainer-path-not-animating-properly
+
+Animator 詳解
+https://medium.com/flutter-community/flutter-animation-has-never-been-easier-part-1-e378e82b2508
+
+
+https://github.com/alessandrofavero/change_ios_launcher_icon_programmatically
+
+一个监听 scrollview 内部 child 的库
+https://pub.dev/packages/widgets_visibility_provider
+
+iOS原生鍵盤音效API
+https://github.com/TUNER88/iOSSystemSoundsLibrary
+
+
+===坑===
+A. podfile.lock 不聽話時：
+方法一:
+rm Podfile
+sudo gem install cocoapods
+flutter build ios --release --no-codesign
+cd ios
+bundle exec pod install
+方法二:
+1. 在项目导航器中，选择您的项目
+2. 选择目标
+3. 删除所有libPods * .a in Build Phases> Link Binary with Libraries
+4. 使用命令pod install更新CocoaPods
+--
+B. iOS/Android jenkins專案首次打包
+iOS : shell=>$ flutter pub get
+Android : 開啟專案確定無誤 -> shell=>$ flutter build apk
+--
+C. 
+iOS簽名時卡在unzip -q ./Runner/xxx.ipa 時, 刪除該ipa再重試一次
+--
+D. Xcode: ld: framework not found AFNetworking
+一般出现这个问题是在swift项目上，因为swift需要用到use_framework!的原因。
+
+终端输入对应的MyProject.xcworkspace,根据终端结果修改直到结果为：** BUILD SUCCEEDED **
+
+xcodebuild -workspace RayClient.xcworkspace -configuration Debug -scheme RayClient build
+--
+E. 無法製作憑證？
+https://docs.microsoft.com/zh-tw/azure/notification-hubs/ios-sdk-get-started
+-
+F. 通过Cocoapods库创建私有库
+https://www.jianshu.com/p/ddc313959e05
+https://www.jianshu.com/p/90672ba63155
+https://github.com/GeeTeam/gt3-ios-cocoapods-support/blob/master/GT3Captcha-iOS.podspec
+
+G. pods 整合到主專案 字串資源無法讀取的問題
+https://stackoverflow.com/questions/12874678/localization-and-cocoapods
+
+H. Swift + Obj-C 混編專案, 必須使用use_frameworks! 如果需要引入.a靜態庫的tricky solution
+https://chaosky.tech/2020/07/28/swift-use-static-framework/
+https://www.jianshu.com/p/b64ff9d8e7ce （bundle資源引用問題）
+
+I.执行命令行出现xcrun: error: active developer path错误解决方法
+出错是因为xcode被删了
+终端执行sudo xcode-select -switch /Applications/Xcode.app/Contents/Developer命令，然后再输入一次系统的密码，完成。
+
+J. 更新fastlane
+bundle install --no-deployment
+
+K.Could not build Objective-C module 'XXXX' / "Flutter/Flutter.h not found."
+1. Quit Xcode.
+2. Delete project's temp files located at ~/Library/Developer/Xcode/DerivedData
+3. Delete ProjectName.xcworkspace
+4. Delete Podfile.lock file and Pods folder
+5. Run pod install.
+6. Open the newly created ProjectName.xcworkspace file and execute $"flutter build ios".
+
+L. iOS开发：真机调试提示XXX is automatically signed, but code signing identity Apple Development问题
+https://blog.csdn.net/CC1991_/article/details/106225842
+
+M. Flutter 解决iOS IPA过大问题
+https://mp.weixin.qq.com/s/TIFjtBl5Kyqyq9ytrak-VQ
+打出来的包是Runner.app，右键显示包内容，依次进入Frameworks-Flutter.framework文件夹。
+然后用终端cd到Flutter.framework目录下，运行命令移除bitcode代码：
+xcrun bitcode_strip Flutter -r -o Flutter
+再查看一下，Runner.app是不是小了许多呢？
+
+N. library not found for -
+終端輸入
+pod deintegrate
+pod install
+
+O. 如何把Pod本地化(Localize)
+https://www.twblogs.net/a/5c2d1bdfbd9eee35b21c2708
